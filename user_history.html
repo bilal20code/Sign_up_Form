@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User History</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="./script.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>User History</h2>
+        <div id="userHistory"></div>
+        <div>
+            <button type="button" class="btn btn-danger" onclick="clearUserHistory()">Clear User History</button>
+            <a href="./index.html" class="btn btn-warning">Back to SignupForm</a>
+        </div>
+    </div>
+
+     <script>
+        function displayUserHistory() {
+            var userList = JSON.parse(localStorage.getItem('userList')) || [];
+
+            if (userList.length === 0) {
+                document.getElementById('userHistory').innerHTML = '<p>No user history found.</p>';
+                return;
+            }
+
+            var userHistoryHtml = '<ul>';
+
+            userList.forEach(function(user, index) {
+                userHistoryHtml += '<li><strong>User ' + (index + 1) + '</strong>';
+                userHistoryHtml += '<ul><li><strong>Username:</strong> ' + user.username + '</li>';
+                userHistoryHtml += '<li><strong>Email:</strong> ' + user.email + '</li>';
+                userHistoryHtml += '<li><strong>Number:</strong> ' + user.number + '</li>';
+                userHistoryHtml += '<li><strong>Password:</strong> ' + user.password + '</li>';
+                userHistoryHtml += '<li><strong>Sign-up Date:</strong> ' + user.signUpDate + '</li></ul>';
+                userHistoryHtml += '</li>';
+            });
+
+            userHistoryHtml += '</ul>';
+
+            document.getElementById('userHistory').innerHTML = userHistoryHtml;
+        }
+
+        displayUserHistory();
+    </script>
+
+    <script>
+        function displayUserHistory() {
+            // Your displayUserHistory() function code here (same as before)
+        }
+
+        function clearUserHistory() {
+            // Clear the user history (i.e., clear the userList in local storage)
+            localStorage.removeItem('userList');
+            // Update the displayed user history after clearing
+            displayUserHistory();
+        }
+
+        displayUserHistory();
+    </script> 
+</body>
+</html>
